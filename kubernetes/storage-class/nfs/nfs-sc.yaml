@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs
+provisioner: fuseim.pri/ifs  # 这里要和controller中的PROVISIONER_NAME保持一致
+parameters:
+  archiveOnDelete: "false"

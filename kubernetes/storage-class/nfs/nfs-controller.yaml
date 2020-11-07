@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  labels:
+    app: nfs-client-provisioner
+  namespace: nfs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: registry.cn-shanghai.aliyuncs.com/jieee/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: fuseim.pri/ifs  # 注意，此处要全局唯一
+            - name: NFS_SERVER
+              value: 10.0.30.15  # 服务器地址
+            - name: NFS_PATH
+              value: /data  # 挂载卷
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 10.0.30.15  # 服务器地址
+            path: /data  # 挂载卷

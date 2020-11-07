@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ali-nas
+mountOptions:
+  - noresvport
+  - vers=4.0
+parameters:
+  server: "abcdefg-hijk.cn-shanghai.nas.aliyuncs.com:/" # 服务地址
+  driver: nfs
+provisioner: alicloud/nas # 此处需要与控制器中的PROVISIONER_NAME保存一致
+reclaimPolicy: Delete

@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cephfs
+provisioner: ceph.com/cephfs  # 这里要和controller中的PROVISIONER_NAME保持一致
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  monitors: 10.0.30.11:6789,10.0.30.12:6789,10.0.30.13:6789 # ceph monitor地址
+  adminId: admin
+  adminSecretName: ceph-secret
+  adminSecretNamespace: "cephfs"
+  claimRoot: /kube
