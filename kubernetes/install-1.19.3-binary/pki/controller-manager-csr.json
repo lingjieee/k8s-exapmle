@@ -1,0 +1,22 @@
+{
+  "CN": "system:kube-controller-manager",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "hosts": [
+    "127.0.0.1",
+    "10.0.50.101",
+    "10.0.50.102",
+    "10.0.50.103"
+  ],
+  "names": [
+    {
+      "C": "CN",
+      "ST": "Hangzhou",
+      "L": "Hangzhou",
+      "O": "system:kube-controller-manager",
+      "OU": "System"
+    }
+  ]
+}

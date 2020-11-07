@@ -1,0 +1,23 @@
+{
+  "CN": "system:kube-scheduler",
+  "hosts": [
+    "127.0.0.1",
+    "127.0.0.1",
+    "10.0.50.101",
+    "10.0.50.102",
+    "10.0.50.103"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "Hangzhou",
+      "L": "Hangzhou",
+      "O": "system:kube-scheduler",
+      "OU": "System"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+bindAddress: 10.0.60.101
+clientConnection:
+  kubeconfig: /etc/kubernetes/kube-proxy.kubeconfig
+clusterCIDR: 172.19.0.0/16
+healthzBindAddress: 10.0.60.101:10256
+kind: KubeProxyConfiguration
+metricsBindAddress: 10.0.60.101:10249
+mode: "ipvs"
