@@ -1,0 +1,52 @@
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=network.target
+
+[Service]
+ExecStart=/opt/kubernetes/bin/kube-apiserver \
+  --advertise-address=10.0.50.101 \
+  --allow-privileged=true \
+  --authorization-mode=Node,RBAC \
+  --client-ca-file=/etc/kubernetes/pki/ca.pem   --enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
+  --enable-bootstrap-token-auth \
+  --etcd-cafile=/etc/kubernetes/pki/ca.pem \
+  --etcd-certfile=/etc/kubernetes/pki/kubernetes.pem \
+  --etcd-keyfile=/etc/kubernetes/pki/kubernetes-key.pem \
+  --etcd-servers=https://10.0.40.101:2379,https://10.0.40.102:2379,https://10.0.40.103:2379 \
+  --insecure-port=0 \
+  --kubelet-client-certificate=/etc/kubernetes/pki/kubernetes.pem \
+  --kubelet-client-key=/etc/kubernetes/pki/kubernetes-key.pem \
+  --proxy-client-cert-file=/etc/kubernetes/pki/proxy-client.pem \
+  --proxy-client-key-file=/etc/kubernetes/pki/proxy-client-key.pem \
+  --runtime-config=api/all=true \
+  --requestheader-client-ca-file=/etc/kubernetes/pki/ca.pem \
+  --requestheader-allowed-names=aggregator \
+  --requestheader-extra-headers-prefix=X-Remote-Extra- \
+  --requestheader-group-headers=X-Remote-Group \
+  --requestheader-username-headers=X-Remote-User \
+  --bind-address=0.0.0.0 \
+  --service-cluster-ip-range=10.120.0.0/16 \
+  --anonymous-auth=false \
+  --service-node-port-range=30000-31000 \
+  --tls-cert-file=/etc/kubernetes/pki/kubernetes.pem \
+  --tls-private-key-file=/etc/kubernetes/pki/kubernetes-key.pem \
+  --service-account-key-file=/etc/kubernetes/pki/ca-key.pem \
+  --enable-swagger-ui=true \
+  --apiserver-count=3 \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/log/kube-apiserver-audit.log \
+  --event-ttl=1h \
+  --alsologtostderr=true \
+  --logtostderr=false \
+  --log-dir=/var/log/kubernetes \
+  --v=2
+Restart=on-failure
+RestartSec=5
+Type=notify
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
