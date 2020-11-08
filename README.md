@@ -3,3 +3,4 @@
 - [二进制部署Kubernetes 1.19.3高可用集群](kubernetes/install-1.19.3-binary)
 - [Kubernetes dashboard部署文件](kubernetes/dashboard-v2.0.4)
 - [Kubernetes StorageClass](kubernetes/storage-class)
+- [使用Rook在k8s中管理Ceph集群](kubernetes/rook-ceph)
